@@ -25,6 +25,11 @@ public class Program {
 			System.out.println("Employee #" + (i+1) + ":");
 			System.out.println("Id: ");
 			Integer id = sc.nextInt();
+			while (hasId(list, id)) {
+				System.out.println("Id alredy taken! Try again: ");
+				id = sc.nextInt();
+			}
+			
 			System.out.println("Name: ");
 			sc.nextLine();
 			String name = sc.nextLine();
@@ -58,6 +63,11 @@ public class Program {
 		}
 		
 		sc.close();
+	}
+	
+	public static boolean hasId(List<Employee> list, int id) {
+		Employee emp = list.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+		return emp != null;
 	}
 
 }
